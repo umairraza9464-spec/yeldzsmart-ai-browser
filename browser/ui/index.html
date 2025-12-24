@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YeldzSmart AI Browser v9.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="nav-bar">
+        <div class="logo" onclick="goHome()">⚡ YeldzSmart v9.0</div>
+        
+        <!-- City Selector -->
+        <div class="city-selector">
+            <select id="citySelect" onchange="switchCity()">
+                <option value="">Select City</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Pune">Pune</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Indore">Indore</option>
+                <option value="Patna">Patna</option>
+                <option value="Surat">Surat</option>
+                <option value="Punjab">Punjab</option>
+            </select>
+        </div>
+        
+        <!-- System Status -->
+        <div class="status-indicator" id="systemStatus">
+            <span class="status-dot"></span>
+            <span class="status-text">ONLINE</span>
+        </div>
+    </div>
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <!-- Core Features -->
+            <div class="sidebar-section">
+                <div class="section-title">🎯 CORE FEATURES</div>
+                
+                <div class="feature-item" onclick="toggleFeature('perplexityAI')">
+                    <span class="feature-icon">🤖</span>
+                    <div class="feature-text">
+                        <div class="feature-name">Perplexity AI Chat</div>
+                        <div class="feature-status">Ready</div>
+                    </div>
+                    <div class="feature-toggle">OFF</div>
+                </div>
+                
+                <div class="feature-item" onclick="toggleFeature('googleSheets')">
+                    <span class="feature-icon">📊</span>
+                    <div class="feature-text">
+                        <div class="feature-name">Google Sheets Sync</div>
+                        <div class="feature-status">Ready</div>
+                    </div>
+                    <div class="feature-toggle">OFF</div>
+                </div>
+            </div>
+            
+            <!-- Automation Panels -->
+            <div class="sidebar-section">
+                <div class="section-title">⚙️ AUTOMATION</div>
+                
+                <div class="feature-item active" onclick="toggleFeature('autoBaiting')">
+                    <span class="feature-icon">🎣</span>
+                    <div class="feature-text">
+                        <div class="feature-name">Auto-Baiting</div>
+                        <div class="feature-status">ON • Running</div>
+                    </div>
+                    <div class="feature-toggle active">ON</div>
+                </div>
+                
+                <div class="feature-item" onclick="toggleFeature('photoOCR')">
+                    <span class="feature-icon">📸</span>
+                    <div class="feature-text">
+                        <div class="feature-name">Photo OCR</div>
+                        <div class="feature-status">Ready</div>
+                    </div>
+                    <div class="feature-toggle">OFF</div>
+                </div>
+            </div>
+            
+            <!-- Campaign Control -->
+            <div class="sidebar-section">
+                <div class="section-title">🚀 CONTROL</div>
+                <button class="action-btn primary" onclick="startCampaign()">▶️ Start Campaign</button>
+                <button class="action-btn secondary" onclick="stopCampaign()">⏹️ Stop Campaign</button>
+                <button class="action-btn" onclick="exportLeads()">📥 Export CSV</button>
+            </div>
+            
+            <!-- Live Stats -->
+            <div class="sidebar-section">
+                <div class="section-title">📊 STATS</div>
+                <div class="stat-row"><span>Total Leads:</span><span class="stat-value" id="totalLeads">0</span></div>
+                <div class="stat-row"><span>Messages:</span><span class="stat-value" id="messagesSent">0</span></div>
+                <div class="stat-row"><span>Numbers:</span><span class="stat-value" id="numbersFound">0</span></div>
+                <div class="stat-row"><span>Campaigns:</span><span class="stat-value" id="activeCampaigns">0</span></div>
+            </div>
+        </div>
+        
+        <!-- Browser Split View -->
+        <div class="browser-area">
+            <div class="split-container">
+                <!-- Left Panel (Facebook) -->
+                <div class="browser-panel" id="leftPanel">
+                    <div class="panel-header">
+                        <span class="panel-title">🌐 Facebook Marketplace</span>
+                        <button class="panel-btn" onclick="refreshPanel('left')">🔄</button>
+                    </div>
+                    <webview id="fbWebview" src="https://www.facebook.com/marketplace" partition="persist:fb"></webview>
+                </div>
+                
+                <!-- Right Panel (OLX) -->
+                <div class="browser-panel" id="rightPanel">
+                    <div class="panel-header">
+                        <span class="panel-title">🛍️ OLX India</span>
+                        <button class="panel-btn" onclick="refreshPanel('right')">🔄</button>
+                    </div>
+                    <webview id="olxWebview" src="https://www.olx.in" partition="persist:olx"></webview>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
